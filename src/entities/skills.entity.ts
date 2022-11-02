@@ -4,6 +4,9 @@ import { User } from "./user.entity";
 import { v4 as uuid } from "uuid"
 
 
+
+
+
 @Entity()
 export class Skill {
 
@@ -14,8 +17,24 @@ export class Skill {
     name:string
 
     @Column()
-    description:string
+    type:string
+    // frontend,backend, style, other
+
+    // coluna da imagem
+    @Column()
+    url_image:string
+
     
+
+    @ManyToOne(()=>User,(user)=>user.skills)
+    user:User
+
+    
+    constructor() {
+        if (!this.id) {
+            this.id = uuid();
+        }
+    }
 
 
 }

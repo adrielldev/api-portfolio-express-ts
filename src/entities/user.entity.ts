@@ -1,7 +1,9 @@
 
-import { Entity, Column, PrimaryColumn } from "typeorm";
+import { Entity, Column, PrimaryColumn,OneToMany } from "typeorm";
 
 import { v4 as uuid } from "uuid"
+import { Project } from "./projects.entity";
+import { Skill } from "./skills.entity";
 
 @Entity()
 export class User {
@@ -13,17 +15,22 @@ export class User {
     @Column()
     name: string
 
+    @Column() // about me
+    description:string
+
     @Column()
     email: string
 
     @Column()
     password:string
 
-    @Column()
-    projects:Array<string>
+    @OneToMany(()=>Skill,(skill)=>skill.user)
+    skills:Skill[]
 
-    @Column()
-    skills: Array<string>
+    @OneToMany(()=>Project,(project)=>project.user)
+    projects:Project[]
+
+
 
 
 
