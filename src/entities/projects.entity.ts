@@ -1,4 +1,4 @@
-import { Entity, Column, PrimaryColumn,ManyToOne,ManyToMany,JoinTable } from "typeorm";
+import { Entity, Column, PrimaryColumn,ManyToOne,ManyToMany,JoinTable,Relation } from "typeorm";
 import { User } from "./user.entity";
 import { Skill } from "./skills.entity";
 
@@ -25,10 +25,10 @@ export class Project{
 
     @ManyToMany(()=>Skill)
     @JoinTable()
-    projects:Skill[]
+    projects:Relation<Skill[]>
 
     @ManyToOne(()=>User,(user)=>user.projects)
-    user:User
+    user:Relation<User>
 
 
 

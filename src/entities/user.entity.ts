@@ -1,5 +1,5 @@
 
-import { Entity, Column, PrimaryColumn,OneToMany } from "typeorm";
+import { Entity, Column, PrimaryColumn,OneToMany,Relation } from "typeorm";
 
 import { v4 as uuid } from "uuid"
 import { Project } from "./projects.entity";
@@ -25,10 +25,10 @@ export class User {
     password:string
 
     @OneToMany(()=>Skill,(skill)=>skill.user)
-    skills:Skill[]
+    skills:Relation<Skill[]>
 
     @OneToMany(()=>Project,(project)=>project.user)
-    projects:Project[]
+    projects:Relation<Project[]>
 
 
 

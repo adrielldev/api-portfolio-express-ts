@@ -1,14 +1,19 @@
 import { AppDataSource } from "../../data-source"
 import { User } from "../../entities/user.entity"
-import { IUserListOne } from "../../interfaces/user/index"
+import { IUserAuth } from "../../interfaces/user/index"
 import jwt from "jsonwebtoken";
 
 
-const userListOneService = async ({authorization}:IUserListOne) => {
+const userListOneService = async ({authorization}:IUserAuth) => {
 
-    const userRepository = AppDataSource.getRepository(User) 
+    const userRepository = AppDataSource.getRepository(User)
 
-    const users = await userRepository.find()
+    const users = await userRepository.find({
+        relations:{
+            skills:true,
+            projects:true
+        }
+    })
 
     if (!authorization){
         throw new Error("No authorization token found")

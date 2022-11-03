@@ -20,7 +20,7 @@ export interface IUserCreate{
     skills:Skill[]
 }
 
-export interface IUserListOne{
+export interface IUserAuth{
     authorization?:string
 }
 

@@ -1,5 +1,5 @@
 
-import { Entity, Column, PrimaryColumn,ManyToOne } from "typeorm";
+import { Entity, Column, PrimaryColumn,ManyToOne,Relation } from "typeorm";
 import { User } from "./user.entity";
 import { v4 as uuid } from "uuid"
 
@@ -13,13 +13,16 @@ export class Skill {
     @PrimaryColumn('uuid')
     readonly id: string;
 
-    @Column()
+    @Column({
+        unique:true
+    })
     name:string
 
-    @Column()
+    @Column({
+        enum:["Frontend","Backend","Fullstack","Style","Other"]
+    })
     type:string
-    // frontend,backend, style, other
-
+    // frontend,backend,fullstack,style, other
     // coluna da imagem
     @Column()
     url_image:string
@@ -27,7 +30,7 @@ export class Skill {
     
 
     @ManyToOne(()=>User,(user)=>user.skills)
-    user:User
+    user:Relation<User>
 
     
     constructor() {
