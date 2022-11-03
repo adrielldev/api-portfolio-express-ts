@@ -2,11 +2,9 @@ import { AppDataSource } from '../../data-source'
 import { User } from '../../entities/user.entity'
 
 
-import { IUserCreate,IUser } from '../../interfaces/user'
+import { IUserCreate} from '../../interfaces/user'
 
-import {v4 as uuidv4} from 'uuid'
-
-
+import bcrypt from 'bcrypt'
 
 
 const userCreateService = async ({name,email,password,description,projects,skills}:IUserCreate) => {
@@ -20,7 +18,7 @@ const userCreateService = async ({name,email,password,description,projects,skill
     }
     const user = new User()
     user.name = name
-    user.password = password
+    user.password = bcrypt.hashSync(password,10)
     user.email = email
     user.description = description
     user.projects = projects
