@@ -25,7 +25,7 @@ export class Project{
 
     @ManyToMany(()=>Skill)
     @JoinTable()
-    projects:Relation<Skill[]>
+    skills:Relation<Skill[]>
 
     @ManyToOne(()=>User,(user)=>user.projects)
     user:Relation<User>
